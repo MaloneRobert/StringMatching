@@ -1,10 +1,10 @@
 import time
 
-
 # KMP Algorithm string-matching method - prints out the index in the input text where the search pattern was found
 # @param pat - the string pattern to search for
 # @param txt - the input text to search for the pattern in
 def KMPSearch(pat, txt):
+    start_time = time.time()
     M = len(pat)    # length of the search pattern
     N = len(txt)    # length of the input string
     lps = [0]*M     # create lps[] that will hold the longest prefix suffix values for pattern matching
@@ -27,6 +27,7 @@ def KMPSearch(pat, txt):
                 j = lps[j-1]
             else:
                 i += 1
+    print("--- string matching took %s seconds ---" % (time.time() - start_time))
 
 # KMP algorithm pattern preprocessing method - builds the lps[] for the search pattern
 # @param pat - the search pattern string
@@ -48,11 +49,14 @@ def computeLPSArray(pat, M, lps):
                 lps[i] = 0
                 i += 1
 
+# ----------------------------------------
+
 txt = "aggcgtatgcgatcctgaccatgcaaaactccagcgtaaatacctagccatggcgacacaaggcgcaagacaggagatgacggcgtttagatcggcgaaatattaaagcaaacgacgatgacttcttcgggaaattagttccctactcgtgtactccaattagccataacactgttcgtcaagatatagggggtcacccatgaatgtcctctaaccagaccatttcgttacacgaacgtatct"
 pat = "aggc"
 
-start_time = time.time()
+runs = 10
+i = 0
 
-KMPSearch(pat, txt)
-
-print("--- string matching took %s seconds ---" % (time.time() - start_time))
+while(i < runs):
+    KMPSearch(pat, txt)
+    i += 1
