@@ -1,4 +1,5 @@
 import time
+import matplotlib.pyplot as plt
 
 def findMatch(string, x):
     start_time = time.time()
@@ -17,16 +18,27 @@ def findMatch(string, x):
 
         if(xi == M-1):   #if every index in the pattern matched the indexes in the string, its a match!
             print("match found at " + str(si))
+            return (time.time() - start_time)
     print("--- string matching took %s seconds ---" % (time.time() - start_time))
 
 # ----------------------------------
 
-string = 'aggcgtatgcgatcctgaccatgcaaaactccagcgtaaatacctagccatggcgacacaaggcgcaagacaggagatgacggcgtttagatcggcgaaatattaaagcaaacgacgatgacttcttcgggaaattagttccctactcgtgtactccaattagccataacactgttcgtcaagatatagggggtcacccatgaatgtcctctaaccagaccatttcgttacacgaacgtatct'
-x = 'aggc'
+n = [10, 100, 1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+y_hat = []
 
-runs = 10
-i = 0
+for ni in range(len(n)):
+    part = 'ab'
+    string = ''
+    x = 'abba'
+    for i in range(n[ni]):
+        string = string + part
+    string = string + x
 
-while(i < runs):
-    findMatch(string, x)
-    i+=1
+    t = findMatch(string, x)
+    y_hat.append(t/60)
+
+plt.plot(n, y_hat)
+plt.title("Naive Method - Time Complexity")
+plt.xlabel("Size of string")
+plt.ylabel("Time (Minutes)")
+plt.show()
