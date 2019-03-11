@@ -1,8 +1,10 @@
+import time
 
 # KMP Algorithm string-matching method
 # @param pat - the string pattern to search for
 # @param txt - the text to search for the pattern in
 def KMPSearch(pat, txt):
+
     M = len(pat)
     N = len(txt)
 
@@ -53,6 +55,11 @@ def computeLPSArray(pat, M, lps):
                 lps[i] = 0
                 i += 1
 
-txt = "ABABDABACDABABCABAB"
-pat = "ABABCABAB"
+txt = "aggcgtatgcgatcctgaccatgcaaaactccagcgtaaatacctagccatggcgacacaaggcgcaagacaggagatgacggcgtttagatcggcgaaatattaaagcaaacgacgatgacttcttcgggaaattagttccctactcgtgtactccaattagccataacactgttcgtcaagatatagggggtcacccatgaatgtcctctaaccagaccatttcgttacacgaacgtatct"
+pat = "aggc"
+
+start_time = time.time()
+
 KMPSearch(pat, txt)
+
+print("--- string matching took %s seconds ---" % (time.time() - start_time))
