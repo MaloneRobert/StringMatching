@@ -1,4 +1,5 @@
 import time
+import matplotlib.pyplot as plt
 
 # KMP Algorithm string-matching method - prints out the index in the input text where the search pattern was found
 # @param pat - the string pattern to search for
@@ -27,6 +28,8 @@ def KMPSearch(pat, txt):
                 j = lps[j-1]
             else:
                 i += 1
+    out = time.time() - start_time
+    return out
     print("--- string matching took %s seconds ---" % (time.time() - start_time))
 
 # KMP algorithm pattern preprocessing method - builds the lps[] for the search pattern
@@ -49,14 +52,27 @@ def computeLPSArray(pat, M, lps):
                 lps[i] = 0
                 i += 1
 
-# ----------------------------------------
+# ----------------------------------
 
-txt = "aggcgtatgcgatcctgaccatgcaaaactccagcgtaaatacctagccatggcgacacaaggcgcaagacaggagatgacggcgtttagatcggcgaaatattaaagcaaacgacgatgacttcttcgggaaattagttccctactcgtgtactccaattagccataacactgttcgtcaagatatagggggtcacccatgaatgtcctctaaccagaccatttcgttacacgaacgtatct"
-pat = "aggc"
+n = [10, 100, 1000, 10000, 100000, 500000, 1000000]
+y_hat = []
 
-runs = 10
-i = 0
+for ni in range(len(n)):
+    part = 'colorado'
+    string = ''
+    x = 'state'
+    for i in range(n[ni]):
+        string = string + part
+    string = string + x
 
-while(i < runs):
-    KMPSearch(pat, txt)
-    i += 1
+    t = KMPSearch(string, x)
+    y_hat.append(t/60)
+
+for ni in range(len(n)):
+    n[ni] = n[ni] * 2 + 4
+
+plt.plot(n, y_hat)
+plt.title("KMP - Time Complexity")
+plt.xlabel("Size of string")
+plt.ylabel("Time (Minutes)")
+plt.show()

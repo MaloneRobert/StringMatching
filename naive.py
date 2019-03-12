@@ -18,24 +18,29 @@ def findMatch(string, x):
 
         if(xi == M-1):   #if every index in the pattern matched the indexes in the string, its a match!
             print("match found at " + str(si))
-            return (time.time() - start_time)
+
+    out = time.time() - start_time
+    return out
     print("--- string matching took %s seconds ---" % (time.time() - start_time))
 
 # ----------------------------------
 
-n = [10, 100, 1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+n = [10, 100, 1000, 10000, 100000, 500000, 1000000]
 y_hat = []
 
 for ni in range(len(n)):
-    part = 'ab'
+    part = 'colorado'
     string = ''
-    x = 'abba'
+    x = 'state'
     for i in range(n[ni]):
         string = string + part
     string = string + x
 
     t = findMatch(string, x)
     y_hat.append(t/60)
+
+for ni in range(len(n)):
+    n[ni] = n[ni] * 5 + 6
 
 plt.plot(n, y_hat)
 plt.title("Naive Method - Time Complexity")
