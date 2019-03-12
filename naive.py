@@ -40,7 +40,7 @@ for ni in range(len(n)):
     y_hat.append(t/60)
 
 for ni in range(len(n)):
-    n[ni] = n[ni] * 5 + 6
+    n[ni] = n[ni] * 8 + 5
 
 plt.plot(n, y_hat)
 plt.title("Naive Method - Time Complexity")
